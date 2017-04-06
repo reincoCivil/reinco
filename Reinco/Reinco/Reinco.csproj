@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Entidades\ActividadItem.cs" />
     <Compile Include="Entidades\AsignarPlantillaSupervisorItem.cs" />
+    <Compile Include="Entidades\Base64Image.cs" />
     <Compile Include="Entidades\Fotos.cs" />
     <Compile Include="Entidades\ObraResponsableItem.cs" />
     <Compile Include="Entidades\ObraPlantillaItem.cs" />
@@ -141,6 +142,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v7.1\Mono.Android.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.1\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>

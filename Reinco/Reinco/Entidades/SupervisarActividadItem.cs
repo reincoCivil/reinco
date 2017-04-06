@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Java.IO;
+using Newtonsoft.Json;
 using Plugin.Media;
 using Reinco.Recursos;
 using System;
@@ -113,19 +114,22 @@ namespace Reinco.Entidades
                         id = 5,
                         array = fotoArray,
                     };
-
-                    var imagenSerializado = JsonConvert.SerializeObject(fotos);
+                       // ImageSource imagenpc = ImageSource.FromFile("D:/rana.jpg");
+                   var imagenSerializado = JsonConvert.SerializeObject(fotos);
                     var body = new StringContent(imagenSerializado, Encoding.UTF8, "application/json");
+                    string fotoE = body.ToString();
                     var client = new HttpClient();
-                    object[,] variables = new object[,] {
-                    { "foto", body } ,{ "idActividad", idSupervisionActividad }};
-                        dynamic result = await Servicio.MetodoGetString("ServicioFoto.asmx", "IngresarFoto", variables);
-                        Mensaje = Convert.ToString(result);
-                        if (result != null)
-                        {
-                            await App.Current.MainPage.DisplayAlert("Ingresar Foto", Mensaje, "OK");
-                            return;
-                        }
+
+                    //object[,] variables = new object[,] {
+                    //{ "foto", fotoE } ,{ "idActividad", idSupervisionActividad }};
+                    //dynamic result = await Servicio.MetodoGetString("ServicioFoto.asmx", "IngresarFoto", variables);
+                    //Mensaje = Convert.ToString(result);
+                    //if (result != null)
+                    //{
+                    //    await App.Current.MainPage.DisplayAlert("Ingresar Foto", Mensaje, "OK");
+                    //    return;
+                    //}
+
                         // Retratado 
                         // var streamTratado = new MemoryStream(fotoArray);
                         // this.ImagenTratado = streamTratado;
@@ -213,7 +217,44 @@ namespace Reinco.Entidades
         }
         public ICommand EncenderCamara { get; private set; }
         #endregion
+        #region==================base64 a imagen=============================
+        private string imageBase64;
+        public string ImageBase64
+        {
+            get { return imageBase64; }
+            set
+            {
+                imageBase64 = value;
+                OnPropertyChanged("ImageBase64");
 
+                Image = Xamarin.Forms.ImageSource.FromStream(
+                    () => new MemoryStream(Convert.FromBase64String(imageBase64)));
+            }
+        }
+
+        private Xamarin.Forms.ImageSource image;
+        public Xamarin.Forms.ImageSource Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                OnPropertyChanged("Image");
+            }
+        }
+        #endregion
+        #region===========imagen a base64======================
+
+        //var base64Img = new Base64Image
+        //{
+        //    FileContents = File.ReadAllBytes("Path to image"),
+        //    ContentType = "image/png"
+        //};
+
+        //string base64EncodedImg = base64Img.ToString();
+        
+
+        #endregion
         #region ===================== Guardar Actividad =====================
         public async void GuardarActividad()
         {
@@ -246,8 +287,22 @@ namespace Reinco.Entidades
             {
                 await mensaje.MostrarMensaje("Agregar Usuario", "Error en el dispositivo o URL incorrecto: " + ex.ToString());
             }
-        } 
+        }
         #endregion
-        
+        public void Imagen64()
+        {
+            //using (Image image = Image.FromFile(Path))
+            //{
+            //    using (MemoryStream m = new MemoryStream())
+            //    {
+            //        image.Save(m, image.RawFormat);
+            //        byte[] imageBytes = m.ToArray();
+
+            //        // Convert byte[] to Base64 String
+            //        string base64String = Convert.ToBase64String(imageBytes);
+            //        return base64String;
+            //    }
+            //}
+        }
     }
 }
