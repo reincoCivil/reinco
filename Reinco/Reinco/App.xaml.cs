@@ -22,7 +22,7 @@ namespace Reinco
         #region +---- Atributos ----+
         public static string opcional = "(Opcional)";
         public static string ip;
-        public static string puerto = "8080";
+        public static string puerto = "8082";
         public VentanaMensaje mensaje;
         #endregion
 
